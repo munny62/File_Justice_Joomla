@@ -1,0 +1,193 @@
+{source}
+<?php
+// Prevent Direct Access in Joomla
+defined('_JEXEC') or die('Restricted Access');
+
+class ContactInfo {
+    public function PrintContact() {
+        echo '<div id="contactSection">';
+        
+        // Team Members Section (Updated Images & Placed at the Top)
+        echo '<div class="team-section">';
+        echo '<h2>Our Team</h2>';
+        
+        $team_members = [
+            [
+                "name" => "Morium Akter Munny",
+                "email" => "morium@example.com",
+                "phone" => "+1 111 222 3333",
+                "image" => "https://cs643.cs.csusm.edu/munny001/images/IMG_20240103_180221.jpg"
+            ],
+            [
+                "name" => "Shrujal",
+                "email" => "shrujal@example.com",
+                "phone" => "+1 444 555 6666",
+                "image" => "https://cs643.cs.csusm.edu/munny001/images/Screenshot_2.png"
+            ],
+            [
+                "name" => "Lokesh",
+                "email" => "lokesh@example.com",
+                "phone" => "+1 777 888 9999",
+                "image" => "https://cs643.cs.csusm.edu/munny001/images/Screenshot_1.png"
+            ]
+        ];
+
+        echo '<div class="team-container">';
+        foreach ($team_members as $member) {
+            echo '<div class="team-member">
+                    <img src="'.$member["image"].'" alt="'.$member["name"].'">
+                    <h3>'.$member["name"].'</h3>
+                    <button class="toggle-btn">View Details</button>
+                    <div class="member-details">
+                        <p><strong>Email:</strong> '.$member["email"].'</p>
+                        <p><strong>Phone:</strong> '.$member["phone"].'</p>
+                    </div>
+                  </div>';
+        }
+        echo '</div>';
+        echo '</div>'; // Close .team-section
+
+        echo '<h2>Contact Information</h2>';
+
+        // Contact Details
+        $contact_details = [
+            "📍 Address" => "123 Business Avenue, Suite 45, New York, NY 10001",
+            "📞 Phone"   => "+1 234 567 890",
+            "✉️ Email"   => "info@example.com",
+            "⏰ Office Hours" => "Monday - Friday: 9:00 AM - 5:00 PM"
+        ];
+
+        echo '<div class="contact-details">';
+        foreach ($contact_details as $label => $value) {
+            echo '<p><strong>'.$label.':</strong> '.$value.'</p>';
+        }
+        echo '</div>';
+
+        // Google Map Embed
+        echo '<div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509371!2d144.95592831531585!3d-37.81720987975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d5df1f1f1f1%3A0x1f1f1f1f1f1f1f1f!2sExample+Business!5e0!3m2!1sen!2sus!4v1649769428123!5m2!1sen!2sus"
+                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+              </div>';
+
+        echo '</div>'; // Close contactSection
+    }
+
+    public function __construct() {
+        // Load Joomla jQuery
+        JHtml::_('jquery.framework');
+
+        // Add CSS for Styling
+        echo '<style>
+                #contactSection {
+                    max-width: 750px;
+                    margin: 30px auto;
+                    padding: 20px;
+                    background: #ffffff;
+                    border-radius: 8px;
+                    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                    text-align: center;
+                }
+
+                h2 {
+                    color: #333;
+                    font-size: 26px;
+                    margin-bottom: 20px;
+                }
+
+                .contact-details {
+                    text-align: left;
+                    font-size: 16px;
+                    line-height: 1.8;
+                    margin-bottom: 20px;
+                    padding: 15px;
+                    background: #f8f9fa;
+                    border-radius: 5px;
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+                }
+
+                .map-container {
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+                    margin-top: 20px;
+                }
+
+                .team-section {
+                    margin-top: 30px;
+                }
+
+                .team-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 20px;
+                }
+
+                .team-member {
+                    text-align: center;
+                    width: 220px;
+                    padding: 15px;
+                    background: #f9f9f9;
+                    border-radius: 8px;
+                    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+                }
+
+                .team-member img {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+                }
+
+                .team-member h3 {
+                    margin: 10px 0;
+                    font-size: 18px;
+                }
+
+                .toggle-btn {
+                    background-color: #007BFF;
+                    color: white;
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    margin-top: 5px;
+                }
+
+                .toggle-btn:hover {
+                    background-color: #0056b3;
+                }
+
+                .member-details {
+                    display: none;
+                    padding: 10px;
+                    font-size: 14px;
+                    background: #ffffff;
+                    border-radius: 5px;
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+                    margin-top: 5px;
+                }
+              </style>';
+
+        // JavaScript for Toggle Details
+        echo '<script>
+                jQuery(document).ready(function($){
+                    $(".toggle-btn").click(function(){
+                        $(this).next(".member-details").slideToggle();
+                    });
+                });
+              </script>';
+
+        // Display Contact Info
+        $this->PrintContact();
+    }
+}
+
+// Initialize and display Contact Info
+$contact = new ContactInfo();
+?>
+{/source}
